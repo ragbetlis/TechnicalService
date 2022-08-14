@@ -1,0 +1,170 @@
+
+<div class="container">
+<div class="row">
+    <div *ngIf="!addDeviceFormOpen" class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button (click)="addDeviceStart()" class="btn btn-primary me-md-2" type="button">Yeni Cihaz Ekle</button>
+    </div>
+    <div *ngIf="addDeviceFormOpen || updateDeviceForm"  class="row addDevice">
+        <div class="row title">Yeni Cihaz Ekle</div>
+        <div  class="row adddeviceForm">
+            <form [formGroup]="dataForm" >
+                <div class="row">                
+                <div class="col-md-6">
+                    <label for="brandId">Marka</label>
+                    <div class="input-group form-group">
+                        
+                          <select                  
+                          formControlName="brandId"                     
+                          aria-placeholder="Marka Seçiniz"
+                          class="form-control"           
+                          id="brandId"                          
+                          >
+                           
+                          <option [value]="brand.brandId"
+                          *ngFor="let brand of brands"
+                          >
+                          
+                          {{brand.brandName}} </option>  
+                      </select> 
+                      <button (click)="openAddBrandDialog()" class="btn btn-outline-warning" type="button">Yeni</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="modelId">Model</label>
+                    <div class="input-group form-group">
+                        
+                        <select                           formControlName="modelId"                     
+                        aria-placeholder="Model Seçiniz"
+                        class="form-control"           
+                        id="modelId">
+                     
+                            <option *ngFor="let model of models" [value]="model.modelId">{{model.modelName}}</option>
+                          </select>
+                          <button (click)="openAddModelDailog()" class="btn btn-outline-warning" type="button">Yeni</button>
+                    </div>
+                </div>
+            </div>
+                <div class="row">        
+                <div class="col-md-6">
+                    <label for="groupId">Grup</label>
+                    <div class="form-group">
+                        <select
+                        formControlName="groupId"                     
+                        aria-placeholder="Grup Seçiniz"
+                        class="form-control"           
+                        id="groupId">
+                            <option selected>Grup Seçiniz</option>
+                            <option *ngFor="let group of groups" [value]="group.groupId">{{group.groupName}}</option>
+                          </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="customerId">Müşteri</label>
+                    <div class="form-group">
+                        <select                           formControlName="customerId"                     
+                        aria-placeholder="Müşteri Seçiniz"
+                        class="form-control"           
+                        id="customerId">
+                            <option selected>Müşteri Seçiniz</option>
+                            <option *ngFor="let customer of customers" [value]="customer.customerId">{{customer.customerName}}</option>
+                          </select>
+                    </div>    
+                </div>
+            </div>
+        
+                <div class="col-md-12">
+                    <label for="seriNo">Seri No</label>
+                    <div class="form-group">
+                        <input type="text" 
+                        id="seriNo"
+                        formControlName="seriNo"
+                        class="form-control"
+                        placeholder="Seri No giriniz.."  
+                            
+                    >
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="barkod">Barkod</label>              
+                    <div class="form-group">
+                        <input type="text" 
+                        id="barkod"
+                        formControlName="barkod"
+                        class="form-control"
+                        placeholder="Barkod No giriniz.."      
+                    >        
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <label for="description">Açıklama</label>  
+
+            
+                    <div class="form-group">
+                        <textarea type="text" 
+                        id="description"
+                        formControlName="description"
+                        class="form-control"
+                        placeholder="Açıklama.."      
+                    ></textarea>        
+                    </div>
+                </div>
+                <div *ngIf="updateDeviceForm" class="form-check">
+                    <input formControlName="status" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Aktif
+                    </label>
+                  </div>
+            </form>     
+        </div>
+        <div class="col-md-12 button-add">
+            <button (click)="updateDeviceForm ? updateDevice() : addDevice()" class="btn btn-addButton">{{updateDeviceForm ? "Güncelle" : "Kaydet"}}</button>
+            <button (click)="closeAddForm()" class="btn btn-warnButton btn-warning">Vazgeç</button>
+        </div>      
+    </div>   
+</div>
+<hr>
+
+<div *ngIf="!addDeviceFormOpen" class="row listDevices">
+
+      <div class="form-check">
+        <input 
+        class="form-check-input check2" 
+        type="checkbox" value="" 
+        id="passiveDevicesid"
+        [(ngModel)]="passiveDevices" 
+        (change)="getDevicesDto()" 
+        >
+        <label class="form-check-label checkkAllDevicesl" for="passiveDevicesid">
+            Pasif Cihazları Göster
+        </label>
+      </div>
+
+
+
+
+      
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Seri No, Barkod, Marka, Model.. " [(ngModel)]="find" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button (click)="getDevicesFilter()" class="btn btn-outline-secondary" type="button" id="button-addon2">Bul</button>
+      </div>
+        <ul>
+            <li *ngFor="let device of devicesDtos">
+                <div  (click)="updateDeviceStart(device)" [class]="getClassName(device)" style="width: 12rem;">
+                    <img src="https://icons.iconarchive.com/icons/pelfusion/long-shadow-media/96/Camera-icon.png" class="card-img-top" >
+                    <div class="card-body">
+                      <h5 class="card-title">{{device.brandName}}</h5><h5 class="card-title ct2"> {{device.modelName}}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Seri No: {{device.seriNo}}</li>
+                      <li class="list-group-item">Barkod: {{device.barkod}}</li>
+                      <li class="list-group-item">Grup: {{device.groupName}}</li>
+                      <li class="list-group-item">{{device.customerName}}</li>
+                      
+                    </ul>
+                  </div>
+            </li>
+        </ul>
+</div>
+</div>
+    
+    

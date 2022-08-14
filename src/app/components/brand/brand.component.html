@@ -1,0 +1,80 @@
+
+<div class="row">
+    <div class="row titleRow">
+        <div class="col-md-6">
+            <h2>Marka & Model</h2>
+        </div>
+        <div class="col-md-6">
+            <img class="brandsIcon" src="https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-7/64/Bookmark-add-icon.png">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div>
+                <div>
+                    <label  for="form">Yeni Marka Ekle </label>
+                </div>
+                <form [formGroup]="brandAddForm">
+                        <input type="text" id="brandName" formControlName="brandName" class="form-control" placeholder="Marka Adı"/>
+                      <button (click)="addBrand()"  class="btn btn-primary btnAdd" >Kaydet</button>
+                </form>
+            </div>
+            <hr>
+            <div class="col-md-12">
+                <table class="table">
+                    <thead> 
+                        <tr class="title">
+                            <th>Marka</th>
+                            <th>Sil</th>
+                        </tr>
+                        <div *ngIf="!dataLoad" class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let brand of brands" class="anRow trBody">
+                            <td>{{brand.brandName}}</td>
+                            <td><button (click)="deleteBrand(brand)" class="btn btn-danger">X</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+    
+        <div class="col-md-5">
+            <div>
+                <div>
+                    <label  for="form">Yeni Model Ekle </label>
+                </div>
+                <form [formGroup]="modelAddForm">
+                                 
+                        <input type="text" id="modelName" formControlName="modelName" class="form-control" placeholder="Model Adı"/>
+                    
+                      <button (click)="addModel()"  class="btn btn-primary btnAdd" >Kaydet</button>
+                </form>
+            </div>
+            <hr>
+            <div class="col-md-12">
+                <table class="table">
+                    <thead> 
+                        <tr class="title">
+                            <th>Model Adı</th>
+                            <th>Sil</th>
+                        </tr>
+                        <div *ngIf="!dataLoad" class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let model of models" class="anRow trBody">
+                            <td>{{model.modelName}}</td>
+                            <td><button (click)="deleteModel(model)" class="btn btn-danger">X</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

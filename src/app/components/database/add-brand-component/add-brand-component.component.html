@@ -1,0 +1,18 @@
+
+<div class="container">
+    <h3>Teknik Servis Yeni Marka</h3>
+    <div class="row">
+    
+        <div>
+            <form [formGroup]="dataForm">
+                <label for="brandName">Marka</label>
+                <input 
+                type="text" id="brandName"
+                formControlName="brandName"
+                class="form-control" 
+                placeholder="Marka giriniz..">
+            </form>
+            <button (click)="AddBrand()" class="btn btn-primary">Kaydet</button>
+        </div>
+    </div>
+</div>
