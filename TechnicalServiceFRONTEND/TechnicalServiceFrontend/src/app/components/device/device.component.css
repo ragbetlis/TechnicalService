@@ -1,0 +1,108 @@
+.addDevice{
+    margin: 50px;
+    padding: 20px 0px 20px 50px;
+    background-color: #692a51;
+    border-radius: 20px 20px 20px 20px;
+
+}
+
+.form-check{
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.button-add{
+    padding: 20px 40px 10px 10px;
+}
+.form-check-label{
+    color:coral;
+    margin-left: 6px;
+}
+.check2{
+    margin: 1px;
+    padding: 4px;
+}
+.title{
+    color:white;
+    font-size: 30px;
+    text-shadow: 4px 2px 4px gray;
+    text-align: center;
+    margin-bottom: 20px;
+    float: right;
+    height: 60px;
+    padding: 20px 20px 20px 40px;
+    background-color: #57153e;
+    border-radius: 20px 20px 20px 20px;
+}
+.col-md-4{
+    padding: 2px;
+    margin: 2px;
+}
+label{
+    color:white;
+}
+.me-md-2{
+    margin-top: 30px;
+}
+
+.btn-addButton{
+    background-color: deepskyblue;
+    color:white;
+    width: 45%;
+    margin:20px 0px 20px 20px;
+float: left;
+    
+}
+.btn-warnButton{
+    
+    color:white;
+    width: 45%;
+    margin:20px 20px 20px 0px;
+float: right;
+    
+}
+
+.listDevices{
+    padding:30px; 
+    margin: 20px;
+}
+.card{
+    padding: 10px;
+    border:1px solid orange;
+    opacity: 0.8;;
+}
+
+li{
+    list-style: none;
+    padding: 5px;
+    cursor: pointer;
+    float: left;
+    margin-bottom: 10px;
+}
+.card:hover{
+    opacity: 1;
+    border:1px solid red;
+
+}
+.cardPassive{
+    border:1px solid black;
+    background-color: lightgray;
+}
+.cardPassive li{
+    background-color: lightgray;
+}
+.takedate{
+    text-decoration:underline;
+}
+.card-title{
+    border-top:2px solid darkslategrey;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 20px;
+    color:darkslategrey;
+    font-size: 20px;
+}
+
+.ct2{
+    border: none;
+}
