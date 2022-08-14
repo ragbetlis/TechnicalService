@@ -1,0 +1,35 @@
+*{
+    margin:0px;
+}
+.container{
+    padding: 20px;
+}
+
+h4{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-left:40px;
+    color:cadetblue;
+    font-size: 90px;
+    font-style: italic;
+    text-shadow: 5px 5px 20px gray;
+}
+
+
+h3{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-left:-10px;
+    margin-top: 40px;
+    color:chocolate;
+    font-size: 90px;
+    font-style: italic;
+    text-shadow: 5px 5px 20px gray;
+}
+.title{
+    border-radius: 20px 20px 20px 20px;
+    margin-top: 25%;
+    margin-left: 30%;
+    background-color:aliceblue;
+    padding: 5%;
+    width: 40%;
+    box-shadow: 20px 20px 30px lightblue;
+}

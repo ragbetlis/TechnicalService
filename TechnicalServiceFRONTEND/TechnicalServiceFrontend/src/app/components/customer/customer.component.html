@@ -1,0 +1,176 @@
+
+<div>
+    <div class="row pageTitle">    
+            <div class="col-md-6">
+                <label class="pageTitle-label">Müşteriler</label>
+            </div>
+            <div class="col-md-6">
+                <button (click)="startAddCustomer()" class="btn btn-warning">Yeni Müşteri</button>
+            </div>
+            <div *ngIf="addFormOpen" class="row customerDeteailDiv">
+                <hr>
+                <form [formGroup]="dataForm">
+                    <div class="col-md-12">
+                        <label for="cityId">il Plaka</label>              
+                        <div class="form-group">
+                            <input type="text" 
+                            id="cityId"
+                            formControlName="cityId"
+                            class="form-control"
+                            placeholder="Plaka kodu giriniz.."      
+                        >        
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="customerName">Müşteri Ünvanı</label>              
+                        <div class="form-group">
+                            <input type="text" 
+                            id="customerName"
+                            formControlName="customerName"
+                            class="form-control"
+                            placeholder="Müşterinin Ünvanı veya gerçek kişi ise adı soyadı"      
+                        >        
+                        </div>
+                    </div> 
+                    <div class="col-md-12">
+                        <label for="contactPerson">Müşteri Temsilcisi</label>              
+                        <div class="form-group">
+                            <input type="text" 
+                            id="contactPerson"
+                            formControlName="contactPerson"
+                            class="form-control"
+                            placeholder="Müşteri temsilcisinin adı soyadı"      
+                        >        
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="phone">Telefon</label>              
+                        <div class="form-group">
+                            <input type="text" 
+                            id="phone"
+                            formControlName="phone"
+                            class="form-control"
+                            placeholder="Telefon"      
+                        >        
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="email">E-posta adresi</label>              
+                        <div class="form-group">
+                            <input type="email" 
+                            id="email"
+                            formControlName="email"
+                            class="form-control"
+                            placeholder="E-Posta adresi.."      
+                        >        
+                        </div>
+                    </div>
+                   
+                </form>
+                <button (click)="addCustomer()" class="btn btn-primary">Kaydet</button>
+            </div>     
+            <div  *ngIf="customerDetailOpen" class="row customerDeteailDiv">
+                <hr>
+                <div class="row rowDetail">
+                    <div class="col-md-4">
+                        <label class="label">Müşteri Ünvanı:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>{{currencyCustomer.customerName}}</label>
+                    </div>
+                </div>
+                <!-- #region <div class="row rowDetail">
+                    <div class="col-md-4">
+                        <label>Şehir:</label> 
+                    </div>
+                    <div class="col-md-8">
+                       <h5>{{cityName}}</h5>
+                    </div>
+                </div>-->
+                <div class="row rowDetail">
+                    <div class="col-md-4">
+                        <label class="label">Firma Yetkilisi:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>{{currencyCustomer.contactPerson}}</label>
+                    </div>
+                </div>
+                <div class="row rowDetail">
+                    <div class="col-md-4">
+                        <label class="label">Telefon:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>{{currencyCustomer.phone}}</label>
+                    </div>
+                </div>
+                <div class="row rowDetail">
+                    <div class="col-md-4">
+                        <label class="label">E-Posta:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>{{currencyCustomer.email}}</label>
+                    </div>
+                </div>
+                <button (click)="getCustomerActivities()" class="btn btn-secondary">Hareketleri Göster</button>
+               
+            </div>
+            <div *ngIf="displayCustomerActivities" class="row rowCustomerActivities">
+                <div>
+                    <button (click)="closeCustomerActivities()" class="btnCloseActivities btn btn-danger">X</button>
+                </div>
+               <hr>
+                <div class="divTable">
+                    <table class="table">
+                        <thead>
+                            <tr class="trActivities">
+                                <th>Müşteri</th>
+                                <th>Seri No</th>
+                                <th>Barkod</th>
+                                <th>Marka Model</th>                            
+                                <th>Durum</th>
+                                <th>Açıklama</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let device of customerActivities" class="bodyTr">
+                                <td>{{device.customerName}}</td>
+                                <td>{{device.seriNo}}</td>
+                                <td>{{device.barkod}}</td>
+                                <td>{{device.brandName}} {{device.modelName}}</td>
+                                <td>{{device.status ? "Aktif" : "Pasif"}}</td>
+                                <td>{{device.description}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+       
+    </div>
+
+
+<div class="row">
+
+    <table class="table">
+        <thead>
+            <tr class="titlesTr">
+                <th>İl</th>
+                <th>Müşteri Ünvanı</th>
+                <th>Müşteri Detay</th>
+                <div *ngIf="!dataLoad" class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bodyTr" *ngFor="let customer of customers" >
+                <td>{{customer.cityId}}</td>
+                <td>{{customer.customerName}}</td>
+                <td><div>
+                    <button (click)="getCustomerDetails(customer)" class="btn btn-secondary">Aç</button>
+                </div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
