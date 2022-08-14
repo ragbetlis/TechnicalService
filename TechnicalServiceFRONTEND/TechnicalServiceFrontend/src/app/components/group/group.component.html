@@ -1,0 +1,48 @@
+
+<div class="row">
+    <div class="row titleRow">
+        <div class="col-md-6">
+            <h2>Ürün Grubu</h2>
+        </div>
+        <div class="col-md-6">
+            <img class="groupIcon" src="https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-13/64/Arrows-Meeting-Point-icon.png">
+        </div>
+    </div>
+    <div class="row rowContainer">
+        <div class="col-md-5">
+            <div>
+                <div>
+                    <label  for="form">Yeni Ürün Grubu Ekle </label>
+
+                </div>
+                <form [formGroup]="groupAddForm">
+                        <input type="text" id="groupName" formControlName="groupName" class="form-control" placeholder="Grup Adı"/>
+                      <button (click)="addGroup()"  class="btn btn-primary btnAdd" >Kaydet</button>
+                </form>
+            </div>
+            <hr>
+            <div class="col-md-12">
+                <table class="table">
+                    <thead> 
+                        <tr class="title">
+                            <th>Grup</th>
+                            <th>Sil</th>
+
+                        </tr>
+                        <div *ngIf="!dataLoad" class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let group of groups" class="anRow trBody">
+                            <td>{{group.groupName}}</td>
+                            <td><button (click)="deleteGroup(group)" class="btn btn-danger">X</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+    </div>
+
+</div>
